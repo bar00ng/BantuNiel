@@ -127,7 +127,8 @@ for (var i = 0; i < lokasiData.length; i++) {
                 iconSize: [30, 30]
             })
         }).bindPopup(
-            "<h6 class='text-center'>" + lokasi.witel + " ( " + lokasi.nama_sto + " )</h6>" +
+            "<h6 class='text-center'>" + lokasi.witel + "</h6>" +
+            "<h6 class='text-center'>" + lokasi.nama_sto + " ( " + lokasi.id_sto + " )</h6>" +
             "<div class='table-responsive'>" +
                 "<table class='table table-striped'>" +
                     "<thead>" +
@@ -156,10 +157,10 @@ for (var i = 0; i < lokasiData.length; i++) {
                             "<td>24-10-2023</td>" +
                             "<td>JOKO</td>" +
                             "<td>" +
-                                "<button class='btn btn-primary btn-sm' onclick=''>Edit</button>" +
+                                "<a href='' class='btn btn-primary btn-sm'>Edit</a>" +
                                 "<button class='btn btn-danger btn-sm' onclick=''>Delete</button>" +
                             "</td>" +
-                            // "<td>" + lokasi.regional + "</td>" +
+                            "<td>" + lokasi.id_sto + "</td>" +
                             // "<td>" + lokasi.witel + "</td>" +
                             // "<td>" + lokasi.id_sto + "</td>" +
                             // "<td>" + lokasi.nama_sto + "</td>" +
