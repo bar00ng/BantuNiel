@@ -1,21 +1,9 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 
 <head>
     @include('Template.head')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-
-    <!-- DataTables CSS dan JS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -49,66 +37,72 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <div class="col-lg-12">
-                <div class="card card-primary card-outline">
-                    <div class="card-header">
-                        <h5 class="m-0">Table
-                            <a href="/data_tracking">
-                                <button type="button" class="btn btn-sm btn-primary float-end mr-1"
-                                data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                Kembali ke Data Tracking Maps
-                                </button>
-                            </a>
-                        </h5>
-                    </div>
-                    <div class="card-body">
+            <div class="container-fluid">
+                <div class="card">
+                    <h5 class="card-header">Edit Data Lokasi</h5>
+                    <div class="card-body p-4">
                         <form action="/update_lokasi/{{ $data->id }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                            <div class="mb-3">
-                              <label for="exampleInputEmail1" class="form-label">Regional</label>
-                              <input name="regional" type="text" class="form-control" value="{{ $data->regional }}" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Regional</label>
+                                        <input name="regional" type="text" class="form-control" value="{{ $data->regional }}" id="exampleInputEmail1" aria-describedby="emailHelp" readonly>
+                                      </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Witel</label>
+                                        <input name="witel" type="text" class="form-control" value="{{ $data->witel }}"  id="exampleInputEmail1" aria-describedby="emailHelp">
+                                      </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label ">ID STO</label>
+                                        <input name="id_sto" type="text" class="form-control @error('id_sto') is-invalid @enderror" value="{{ $data->id_sto }} " id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        @error('id_sto')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                        @enderror
+                                      </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Witel</label>
-                                <input name="witel" type="text" class="form-control" value="{{ $data->witel }}"  id="exampleInputEmail1" aria-describedby="emailHelp">
-                              </div>
-                              <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Id STO</label>
-                                <input name="id_sto" type="text" class="form-control" value="{{ $data->id_sto }} " id="exampleInputEmail1" aria-describedby="emailHelp">
-                              </div>
-                              <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Nama STO</label>
-                                <input name="nama_sto" type="text" class="form-control" value="{{ $data->nama_sto }}" id="exampleInputEmail1" aria-describedby="emailHelp">
-                              </div>
-                              <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Lat</label>
-                                <input name="lat" type="text" class="form-control" value="{{ $data->lat }}" id="exampleInputEmail1" aria-describedby="emailHelp">
-                              </div>
-                               <div class="mb-3">
-                              <label for="exampleInputEmail1" class="form-label">Long</label>
-                              <input name="long" type="text" class="form-control" value="{{ $data->long }}" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Nama STO</label>
+                                        <input name="nama_sto" type="text" class="form-control" value="{{ $data->nama_sto }}" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                      </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Lat</label>
+                                        <input name="lat" type="text" class="form-control" value="{{ $data->lat }}" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                      </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Long</label>
+                                        <input name="long" type="text" class="form-control" value="{{ $data->long }}" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    </div>
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Ubah</button>
-                          </form>
+                            <button type="submit" class="btn btn-success">Ubah</button>
+                            <a href="/data_tracking" class="btn btn-primary">Batal</a>
+                        </form>
                     </div>
                 </div>
-                <!-- /.col-md-6 -->
             </div>
-            <!-- /.content-wrapper -->
 
-            <!-- Main Footer -->
+        </div><!-- /.content-wrapper -->
 
-        </div>
-        <!-- ./wrapper -->
 
         <!-- REQUIRED SCRIPTS -->
         <!-- jQuery -->
-       <script>
-        $(document).ready(function() {
-            $('#datatables3').DataTable();
-        });
-       </script>
+        @include("Template/script_tracking")
+    </div><!-- /.wrapper -->
 </body>
 
 </html>

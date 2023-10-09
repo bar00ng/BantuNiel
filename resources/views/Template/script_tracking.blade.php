@@ -133,19 +133,32 @@ for (var i = 0; i < lokasiData.length; i++) {
                     "<thead>" +
                         "<tr>" +
                             "<th>STO</th>" +
-                            "<th>Type</th>" +
+                            "<th>Types</th>" +
                             "<th>Platform</th>" +
-                            "<th>OLT Size</th>" +
+                            "<th>OLT Sizes</th>" +
                             "<th>Tgl Dikirim</th>" +
                             "<th>Status</th>" +
                             "<th>Tgl Diterima</th>" +
                             "<th>PIC Penerima</th>" +
+                            "<th>Aksi</th>" +
                             // "<th>Lat</th>" +
                             // "<th>Long</th>" +
                         "</tr>" +
                         "</thead>" +
                         "<tbody>" +
                         "<tr>" +
+                            "<td>BDK</td>" +
+                            "<td>GPSHSP</td>" +
+                            "<td>HWE</td>" +
+                            "<td>BIG</td>" +
+                            "<td>22-10-2023</td>" +
+                            "<td>DITERIMA</td>" +
+                            "<td>24-10-2023</td>" +
+                            "<td>JOKO</td>" +
+                            "<td>" +
+                                "<button class='btn btn-primary btn-sm' onclick=''>Edit</button>" +
+                                "<button class='btn btn-danger btn-sm' onclick=''>Delete</button>" +
+                            "</td>" +
                             // "<td>" + lokasi.regional + "</td>" +
                             // "<td>" + lokasi.witel + "</td>" +
                             // "<td>" + lokasi.id_sto + "</td>" +

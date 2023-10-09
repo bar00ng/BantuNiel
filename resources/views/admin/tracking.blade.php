@@ -4,6 +4,7 @@
 <head>
     @include('Template.head')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -207,18 +208,18 @@
                                         <table id="datatables-mini" class="text-center table table-striped table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>WITEL</th>
+                                                    <th>Witel</th>
                                                     <th>STO</th>
                                                     <th>Hostname</th>
                                                     <th>IP OLT</th>
-                                                    <th>TYPES</th>
+                                                    <th>Types</th>
                                                     <th>Platform</th>
-                                                    <th>OLT SIZES</th>
+                                                    <th>OLT Sizes</th>
                                                     <th>Tgl Dikirim</th>
                                                     <th>Status</th>
                                                     <th>Tgl Diterima</th>
                                                     <th>PIC Penerima</th>
-                                                    <th>AKSI</th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -237,8 +238,8 @@
                                                     <td>{{ $track->tgl_diterima }}</td>
                                                     <td>{{ $track->pic_penerima }}</td>
                                                     <td>
-                                                        <a href="" class="btn btn-sm btn-danger">Delete</a>
-                                                        <a href="/edit_data_track/{{ $track->id }}"class="btn btn-sm btn-success">Detail</a>
+                                                        <a href="/edit_data_track/{{ $track->id }}"class="btn btn-sm btn-success"><i class="bi bi-pencil-square"></i></a>
+                                                        <a href="" class="btn btn-sm btn-danger"><i class="bi bi-trash3-fill"></i></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
