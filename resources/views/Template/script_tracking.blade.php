@@ -24,75 +24,76 @@
     }
 </style>
 <script>
-     $(document).ready(function() {
+    $(document).ready(function() {
         $('#datatables-mini').DataTable()
     });
 
     // Map initilization
     var map = L.map('map', {
-    center: [-6.9169931, 107.6111925],
-    zoom: 8,
-    dragging: true,
-    scrollWheelZoom: true,
-    zoomControl: true,
-    minZoom: 8,
-});
+        center: [-6.9169931, 107.6111925],
+        zoom: 8,
+        dragging: true,
+        scrollWheelZoom: true,
+        zoomControl: true,
+        minZoom: 8,
+    });
 
-var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-});
-osm.addTo(map)
+    var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    osm.addTo(map)
 
-// Water color
-var watercolor = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-});
-// watercolor.addTo(map)
+    // Water color
+    var watercolor = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    // watercolor.addTo(map)
 
-// Google Street
-googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-    maxZoom: 20,
-    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-});
-// googleStreets.addTo(map)
+    // Google Street
+    googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+    });
+    // googleStreets.addTo(map)
 
-// Google Satelite
-googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-    maxZoom: 20,
-    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-});
-// googleSat.addTo(map)
-// Membuat base maps
-var baseMaps = {
-    "Normal": osm,
-    "Satellite": googleSat
-};
+    // Google Satelite
+    googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+    });
+    // googleSat.addTo(map)
+    // Membuat base maps
+    var baseMaps = {
+        "Normal": osm,
+        "Satellite": googleSat
+    };
 
-// Membuat layer kontrol
-var layerControl = L.control.layers(baseMaps, {}, {
-    collapsed: false // Menampilkan layer control secara default
-}).addTo(map);
+    // Membuat layer kontrol
+    var layerControl = L.control.layers(baseMaps, {}, {
+        collapsed: false // Menampilkan layer control secara default
+    }).addTo(map);
 
-// Menambahkan OSM (Normal) sebagai layer default
-osm.addTo(map);
+    // Menambahkan OSM (Normal) sebagai layer default
+    osm.addTo(map);
 
 
-// Marker
-var lokasiData = @json($data); // Pastikan Anda telah meneruskan data dari controller ke view
-var markers = []; // Array untuk menyimpan marker
+    // Marker
+    var lokasiData = @json($data); // Pastikan Anda telah meneruskan data dari controller ke view
+    console.log(lokasiData);
+    var markers = []; // Array untuk menyimpan marker
 
-// BEFORE
-// for (var i = 0; i < lokasiData.length; i++) {
-//     var lokasi = lokasiData[i];
-//     var marker = L.marker([lokasi.lat, lokasi.long]).bindPopup(
-//         "<h6 class='text-center'>" + lokasi.nama_sto + " ( " + lokasi.witel + " )</h6>"
-//     ).openPopup();
-//     markers.push(marker);
-// }
+    // BEFORE
+    // for (var i = 0; i < lokasiData.length; i++) {
+    //     var lokasi = lokasiData[i];
+    //     var marker = L.marker([lokasi.lat, lokasi.long]).bindPopup(
+    //         "<h6 class='text-center'>" + lokasi.nama_sto + " ( " + lokasi.witel + " )</h6>"
+    //     ).openPopup();
+    //     markers.push(marker);
+    // }
 
-// Loop melalui data lokasi dan membuat marker untuk setiap lokasi
-for (var i = 0; i < lokasiData.length; i++) {
+    // Loop melalui data lokasi dan membuat marker untuk setiap lokasi
+    for (var i = 0; i < lokasiData.length; i++) {
         var lokasi = lokasiData[i];
         var markerColor = 'blue'; // Warna default
 
@@ -129,51 +130,52 @@ for (var i = 0; i < lokasiData.length; i++) {
         }).bindPopup(
             "<h6 class='text-center'>" + lokasi.witel + " ( " + lokasi.nama_sto + " )</h6>" +
             "<div class='table-responsive'>" +
-                "<table class='table table-striped'>" +
-                    "<thead>" +
-                        "<tr>" +
-                            "<th>STO</th>" +
-                            "<th>Type</th>" +
-                            "<th>Platform</th>" +
-                            "<th>OLT Size</th>" +
-                            "<th>Tgl Dikirim</th>" +
-                            "<th>Status</th>" +
-                            "<th>Tgl Diterima</th>" +
-                            "<th>PIC Penerima</th>" +
-                            // "<th>Lat</th>" +
-                            // "<th>Long</th>" +
-                        "</tr>" +
-                        "</thead>" +
-                        "<tbody>" +
-                        "<tr>" +
-                            // "<td>" + lokasi.regional + "</td>" +
-                            // "<td>" + lokasi.witel + "</td>" +
-                            // "<td>" + lokasi.id_sto + "</td>" +
-                            // "<td>" + lokasi.nama_sto + "</td>" +
-                            // "<td>" + lokasi.lat + "</td>" +
-                            // "<td>" + lokasi.long + "</td>" +
-                        "</tr>" +
-                    "</tbody>" +
-                "</table>" +
+            "<table class='table table-striped'>" +
+            "<thead>" +
+            "<tr>" +
+            "<th>STO</th>" +
+            "<th>Type</th>" +
+            "<th>Platform</th>" +
+            "<th>OLT Size</th>" +
+            "<th>Tgl Dikirim</th>" +
+            "<th>Status</th>" +
+            "<th>Tgl Diterima</th>" +
+            "<th>PIC Penerima</th>" +
+            // "<th>Lat</th>" +
+            // "<th>Long</th>" +
+            "</tr>" +
+            "</thead>" +
+            "<tbody>" +
+            "<tr>" +
+            "<td>" + (lokasi.tracking ? lokasi.tracking.sto : '-') + "</td>" +
+            "<td>" + (lokasi.tracking ? lokasi.tracking.types : '-') + "</td>" +
+            "<td>" + (lokasi.tracking ? lokasi.tracking.platform : '-') + "</td>" +
+            "<td>" + (lokasi.tracking ? lokasi.tracking.olt_size : '-') + "</td>" +
+            "<td>" + (lokasi.tracking ? lokasi.tracking.tgl_dikirim : '-') + "</td>" +
+            "<td>" + (lokasi.tracking ? lokasi.tracking.status : '-') + "</td>" +
+            "<td>" + (lokasi.tracking ? lokasi.tracking.tgl_diterima : '-') + "</td>" +
+            "<td>" + (lokasi.tracking ? lokasi.tracking.pic_penerima : '-') + "</td>" +
+            "</tr>" +
+            "</tbody>" +
+            "</table>" +
             "</div>"
         ).openPopup();
         markers.push(marker);
     }
 
-// Buat layerGroup untuk semua marker
-var markerGroup = L.layerGroup(markers);
+    // Buat layerGroup untuk semua marker
+    var markerGroup = L.layerGroup(markers);
 
-// Tambahkan layerGroup ke peta
-markerGroup.addTo(map);
+    // Tambahkan layerGroup ke peta
+    markerGroup.addTo(map);
 
 
-// Event
-map.on('mousemove', function(e) {
-    document.getElementsByClassName('coordinate')[0].innerHTML = 'lat: ' + e.latlng.lat + ' lng: ' + e
-        .latlng.lng;
-    // console.log('lat: ' + e.latlng.lat + ' lng: ' + e.latlng.lng);
+    // Event
+    map.on('mousemove', function(e) {
+        document.getElementsByClassName('coordinate')[0].innerHTML = 'lat: ' + e.latlng.lat + ' lng: ' + e
+            .latlng.lng;
+        // console.log('lat: ' + e.latlng.lat + ' lng: ' + e.latlng.lng);
 
-    // Di sini Anda dapat menambahkan logika tambahan berdasarkan pergerakan mouse
-});
-
+        // Di sini Anda dapat menambahkan logika tambahan berdasarkan pergerakan mouse
+    });
 </script>

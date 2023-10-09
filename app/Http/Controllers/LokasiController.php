@@ -17,7 +17,7 @@ class LokasiController extends Controller
     public function index_t() {
 
         $tracking = Track::all();
-        $data = Lokasi::all();
+        $data = Lokasi::with('tracking')->get();
         $countBandung = Lokasi::where('witel', 'BANDUNG')->count();
         $countBandungBarat = Lokasi::where('witel', 'BANDUNG BARAT')->count();
         $countCirebon = Lokasi::where('witel', 'CIREBON')->count();

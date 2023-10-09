@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Track;
 
 class Lokasi extends Model
 {
@@ -21,4 +22,7 @@ class Lokasi extends Model
         "long"
     ];
 
+    public function tracking() {
+        return $this->belongsTo(Track::class, 'id_sto', 'sto');
+    }
 }
