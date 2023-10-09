@@ -128,7 +128,8 @@
                 iconSize: [30, 30]
             })
         }).bindPopup(
-            "<h6 class='text-center'>" + lokasi.witel + " ( " + lokasi.nama_sto + " )</h6>" +
+            "<h6 class='text-center'>" + lokasi.witel + "</h6>" +
+            "<h6 class='text-center'>" + lokasi.nama_sto + " ( " + lokasi.id_sto + " )</h6>" +
             "<div class='table-responsive'>" +
             "<table class='table table-striped'>" +
             "<thead>" +

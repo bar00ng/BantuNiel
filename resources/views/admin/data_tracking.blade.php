@@ -27,6 +27,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Main Sidebar Container -->
         @include('Template.sidebar')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.6/dist/sweetalert2.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        @if ($success = Session::get('success'))
+            <script>
+                Swal.fire({
+                    title: 'Tambah Data Berhasil!',
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    timer: 2500,
+                    timerProgressBar: true
+                });
+            </script>
+        @endif
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -85,7 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <td>{{ $tr->lat }}</td>
                                             <td>{{ $tr->long }}</td>
                                             <td>
-                                                <a href="/edit_lokasi/{{ $tr->id }}"class="btn btn-sm btn-success">Edit</a>
+                                                <a href="/edit_lokasi/{{ $tr->id }}"class="btn btn-sm btn-success"><i class="bi bi-pencil-square"></i></a>
                                                 <a href="" class="btn btn-sm btn-danger"><i class="bi bi-trash3-fill"></i></a>
                                             </td>
                                         </tr>
